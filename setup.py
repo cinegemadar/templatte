@@ -12,6 +12,7 @@ setup(
     install_requires=[
        "Jinja2",
        "pandas",
-       "pdfkit"
+       "pdfkit",
+       "openpyxl"
     ],
 )
