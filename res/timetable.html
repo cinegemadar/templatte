@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{style}}">
+    <title>School Timetable</title>
+</head>
+<body>
+    <header>
+        <h1>Timetable</h1>
+        <div id="logo-container">
+            <img class="logo" src="{{ logo_path }}" alt="School Logo">
+        </div>
+    </header>
+    <table>
+        <tr>
+            <th>Time</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+        </tr>
+        {% for period in data %}
+            <tr>
+                <td>{{ period.Time }}</td>
+                <td>{{ period.Monday }}</td>
+                <td>{{ period.Tuesday }}</td>
+                <td>{{ period.Wednesday }}</td>
+                <td>{{ period.Thursday }}</td>
+                <td>{{ period.Friday }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
