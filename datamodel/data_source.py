@@ -47,16 +47,16 @@ class CsvDataSource(IDataSource):
         """Initialize the CSV data source."""
         super().__init__()
 
-    def connect(self, connection: str, csv_params: dict = None) -> None:
+    def connect(self, connection: str, csv_args: dict = {}) -> None:
         """Connect to the CSV file."""
-        df = pd.read_csv(connection, **csv_params)
+        df = pd.read_csv(connection, **csv_args)
         self.data(df)
 
 
 class ExcelDataSource(IDataSource):
     """Data source for Excel files."""
 
-    def __init__(self, connection: str, excel_args: dict) -> None:
+    def __init__(self, connection: str, excel_args : dict = {}) -> None:
         """Initialize the Excel data source."""
         super().__init__()
         self.excel_args = excel_args

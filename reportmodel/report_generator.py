@@ -10,7 +10,7 @@ logger = environment.setup_logger()
 class ReportGenerator:
     """Generates reports in PDF format."""
 
-    def __init__(self, logo: Path, style: Path, template: Template = None) -> None:
+    def __init__(self, logo: Path = Path(), style: Path = Path(), template: Template = None) -> None:
         """
         Initialize the ReportGenerator object.
 
@@ -66,7 +66,7 @@ class ReportGenerator:
             template: A Template object.
 
         """
-        self._template = Template
+        self._template = template
 
     @template.setter
     def template(self, template_folder: Path, template_file: Path) -> None:
@@ -116,10 +116,12 @@ class ReportGenerator:
         try:
             data = self.format(data)
             output = template.render(
-                logo_path=str(self._logo.resolve()),
-                style=str(self._style.resolve()),
                 **data,
+                logo_path=str(self._logo.resolve()),
+                style=str(self._style.resolve())
             )
+            with open(f"{path}.html", "w") as html:
+                html.write(output)
             # Save the HTML to a PDF
             pdfkit.from_string(
                 output,
@@ -128,4 +130,4 @@ class ReportGenerator:
             )
             return None
         except Exception as e:
-            logger.error(f'Error generating PDF for employee {data["user"]}: {e}')
+            logger.error(e)

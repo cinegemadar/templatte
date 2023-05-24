@@ -1,7 +1,9 @@
 from datamodel import data_source
 from reportmodel import report_generator
 from typing import Callable
+from environment.environment import setup_logger
 
+logger = setup_logger()
 
 class Report:
     """Generates reports using a data source and report generator."""
@@ -30,6 +32,16 @@ class Report:
             path: A callable that returns the path for each generated report, based on the provided data.
 
         """
-        records = self._datamodel.data
-        for row in records:
+        self._reportmodel.generate(data={"data" : self._datamodel.data}, path=path(self._datamodel.data))
+    
+    def create_each(self, path: Callable[[dict], str]):
+        """
+        Create reports using the provided data source and report generator.
+
+        Args:
+            path: A callable that returns the path for each generated report, based on the provided data.
+
+        """
+        for row in self._datamodel.data:
+            logger.debug(row)
             self._reportmodel.generate(data=row, path=path(row))
