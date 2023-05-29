@@ -1,8 +1,7 @@
-from report.report import Report
-from datamodel.data_source import ExcelDataSource
-from reportmodel.report_generator import ReportGenerator
-from reportmodel.template import Template
-from environment import environment
+from templatte.report import Report
+from templatte.data_source import ExcelDataSource
+from templatte.report_generator import ReportGenerator
+from templatte.template import Template
 from pathlib import Path
 
 
@@ -20,7 +19,7 @@ def create_report(out_folder:str) -> None:
     timetable.create(lambda _: f"./{out_folder}/timetable.pdf")
 
 def main():
-    out_folder = "./report/demo/out/timetable"
+    out_folder = "demo/out/timetable"
     create_report(out_folder)
 
 
